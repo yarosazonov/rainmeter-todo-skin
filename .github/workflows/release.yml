@@ -18,17 +18,17 @@ jobs:
 
       - name: Create RMSKIN Structure
         run: |
-          mkdir -p build/Skins/rainmeter-todo
-          cp -r @Resources todo build/Skins/rainmeter-todo/
+          mkdir -p build/Skins/rainmeter-todo-yaro
+          cp -r @Resources todo build/Skins/rainmeter-todo-yaro/
           
           # Create RMSKIN.ini safely
           cat << 'EOF' > build/RMSKIN.ini
           [rmskin]
-          Name=rainmeter todo skin
+          Name=Rainmeter To-Do (Yaro)
           Author=Yaro Sazonov
           Version=__VERSION__
           LoadType=Skin
-          Load=rainmeter-todo\todo\todo.ini
+          Load=rainmeter-todo-yaro\todo\todo.ini
           MinimumRainmeter=4.0.0.0
           EOF
           
