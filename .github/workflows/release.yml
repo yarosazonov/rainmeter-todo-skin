@@ -32,17 +32,17 @@ jobs:
           MinimumRainmeter=4.0.0.0
           EOF
           
-          # Inject version and convert to Windows CRLF line endings
+          # Inject version
           sed -i "s/__VERSION__/${{ github.ref_name }}/" build/RMSKIN.ini
-          sed -i 's/$/\r/' build/RMSKIN.ini
           
       - name: Package RMSKIN
-        run: |
-          cd build
-          zip -r ../rainmeter-todo-${{ github.ref_name }}.rmskin RMSKIN.ini Skins/
+        id: builder
+        uses: 2bndy5/rmskin-action@v2.0.4
+        with:
+          path: build
           
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: rainmeter-todo-${{ github.ref_name }}.rmskin
+          files: "*.rmskin"
           generate_release_notes: true
