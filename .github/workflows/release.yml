@@ -21,20 +21,16 @@ jobs:
           mkdir -p build/Skins/rainmeter-todo
           cp -r @Resources todo build/Skins/rainmeter-todo/
           
-          # Create RMSKIN.ini
-          cat <<EOF > build/RMSKIN.ini
-          [rmskin]
-          Name=rainmeter todo skin
-          Author=Yaro Sazonov
-          Version=${{ github.ref_name }}
-          LoadType=Skin
-          Load=rainmeter-todo\todo\todo.ini
-          EOF
+          # Create RMSKIN.ini with Windows CRLF line endings
+          python -c "
+with open('build/RMSKIN.ini', 'w', encoding='utf-16') as f:
+    f.write('[rmskin]\nName=rainmeter todo skin\nAuthor=Yaro Sazonov\nVersion=${{ github.ref_name }}\nLoadType=Skin\nLoad=rainmeter-todo\todo\todo.ini\nMinimumRainmeter=4.0.0.0\n'.replace('\n', '\r\n'))
+"
           
       - name: Package RMSKIN
         run: |
           cd build
-          zip -r ../rainmeter-todo-${{ github.ref_name }}.rmskin *
+          zip -r ../rainmeter-todo-${{ github.ref_name }}.rmskin RMSKIN.ini Skins/
           
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
