@@ -21,11 +21,20 @@ jobs:
           mkdir -p build/Skins/rainmeter-todo
           cp -r @Resources todo build/Skins/rainmeter-todo/
           
-          # Create RMSKIN.ini with Windows CRLF line endings
-          python -c "
-with open('build/RMSKIN.ini', 'w', encoding='utf-16') as f:
-    f.write('[rmskin]\nName=rainmeter todo skin\nAuthor=Yaro Sazonov\nVersion=${{ github.ref_name }}\nLoadType=Skin\nLoad=rainmeter-todo\todo\todo.ini\nMinimumRainmeter=4.0.0.0\n'.replace('\n', '\r\n'))
-"
+          # Create RMSKIN.ini safely
+          cat << 'EOF' > build/RMSKIN.ini
+          [rmskin]
+          Name=rainmeter todo skin
+          Author=Yaro Sazonov
+          Version=__VERSION__
+          LoadType=Skin
+          Load=rainmeter-todo\todo\todo.ini
+          MinimumRainmeter=4.0.0.0
+          EOF
+          
+          # Inject version and convert to Windows CRLF line endings
+          sed -i "s/__VERSION__/${{ github.ref_name }}/" build/RMSKIN.ini
+          sed -i 's/$/\r/' build/RMSKIN.ini
           
       - name: Package RMSKIN
         run: |
