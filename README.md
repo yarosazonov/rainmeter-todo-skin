@@ -1,13 +1,6 @@
-# ✔️ Rainmeter To-Do
+# ✔️ Rainmeter To-Do Skin
 
-While searching for a Rainmeter todo skin for my personal needs, I found a skin named [rainmeter-todo-list](https://github.com/Pernickety/rainmeter-todo-list). This project has been developed based on [rainmeter-todo-list](https://github.com/Pernickety/rainmeter-todo-list).  I developed this code with various performance fixes and features (delete, order, trash etc...).
-
-## 🎞️ Preview
-
-You can watch the YouTube video by clicking the following image.
-
-[![Rainmeter To-Do](https://img.youtube.com/vi/OSRlsK0ABI4/0.jpg)](https://www.youtube.com/watch?v=OSRlsK0ABI4 "Rainmeter To-Do")
-
+Forked from https://github.com/alperenozlu/rainmeter-todo
 
 ## 📝 Features
 
@@ -20,7 +13,7 @@ You can watch the YouTube video by clicking the following image.
 
 ###### Via Installer
 
-+ Go to the [release](https://github.com/alperenozlu/rainmeter-todo/releases) page and download the latest .rmskin file.
++ Go to the [release](https://github.com/yaro-sazonov/rainmeter-todo-skin/releases) page and download the latest .rmskin file.
 + Install skin with a double click to the downloaded file.
 + [Activate the skin](#activate-skin)
 

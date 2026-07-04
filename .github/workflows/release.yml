@@ -1,0 +1,39 @@
+name: Release RMSKIN
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create RMSKIN Structure
+        run: |
+          mkdir -p build/Skins/rainmeter-todo
+          cp -r @Resources todo build/Skins/rainmeter-todo/
+          
+          # Create RMSKIN.ini
+          cat <<EOF > build/RMSKIN.ini
+          [rmskin]
+          Name=rainmeter todo skin
+          Author=Yaro Sazonov
+          Version=${GITHUB_REF_NAME#v}
+          LoadType=Skin
+          Load=rainmeter-todo\todo\todo.ini
+          EOF
+          
+      - name: Package RMSKIN
+        run: |
+          cd build
+          zip -r ../rainmeter-todo-${GITHUB_REF_NAME}.rmskin *
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: rainmeter-todo-${GITHUB_REF_NAME}.rmskin
+          generate_release_notes: true
